@@ -1,0 +1,89 @@
+{
+  "skill_name": "axios-audit",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Audit our repository to find all axios usage. We're planning to migrate to native fetch and need to understand the full scope of what depends on axios, including both direct and transitive dependencies. Generate a comprehensive report showing where axios is used and which packages would be affected.",
+      "expected_output": "A markdown report showing: (1) direct axios dependencies with versions, (2) transitive dependencies (packages that depend on packages that depend on axios), (3) code locations with file paths and line numbers where axios is imported or used, (4) an executive summary with counts and impact assessment, (5) recommendations for migration",
+      "assertions": [
+        {
+          "name": "includes_executive_summary",
+          "description": "Report includes an executive summary with counts of direct dependencies, transitive dependencies, and code usage locations"
+        },
+        {
+          "name": "distinguishes_direct_transitive",
+          "description": "Report clearly distinguishes between direct dependencies and transitive dependencies with separate sections"
+        },
+        {
+          "name": "includes_code_locations",
+          "description": "Report lists actual file paths and line numbers where axios is imported or used in code"
+        },
+        {
+          "name": "provides_recommendations",
+          "description": "Report includes recommendations for migration or remediation"
+        },
+        {
+          "name": "identifies_10_plus_packages",
+          "description": "Report identifies at least 10 packages that depend on axios (direct or transitive)"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I need to check if @nestjs/axios is in our monorepo and understand the dependency chain. Some of our modules use HttpService which relies on @nestjs/axios. Show me all the files that import axios or use HttpService, and flag any packages that transitively depend on axios without us explicitly asking for it.",
+      "expected_output": "A markdown report distinguishing between: (1) direct usage of axios imports, (2) NestJS HttpService patterns, (3) packages that transitively bring in axios as a dependency, including the full chain showing which package depends on which",
+      "assertions": [
+        {
+          "name": "finds_nestjs_axios",
+          "description": "Report identifies @nestjs/axios as a dependency"
+        },
+        {
+          "name": "identifies_httpservice_usage",
+          "description": "Report finds HttpService usage patterns in the code (NestJS pattern)"
+        },
+        {
+          "name": "shows_transitive_chain",
+          "description": "Report displays the dependency chain showing which packages depend on which other packages"
+        },
+        {
+          "name": "includes_file_paths",
+          "description": "Report includes specific file paths and line numbers for each usage"
+        },
+        {
+          "name": "distinguishes_nestjs_patterns",
+          "description": "Report clearly distinguishes between direct axios imports and @nestjs/axios/HttpService patterns"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "We want to consolidate our HTTP clients. Audit the repository to identify all places where we're using axios or packages that depend on axios. Group the findings by package/module and show me the complete dependency tree. I need to know if we have multiple versions of axios or conflicting HTTP client libraries.",
+      "expected_output": "A markdown report organized by package/module showing: (1) axios version(s) found with which packages require them, (2) version conflicts if multiple versions are detected, (3) related HTTP libraries that also depend on axios, (4) a clean dependency tree making it obvious which modules would need to be updated in a consolidation effort",
+      "assertions": [
+        {
+          "name": "groups_by_module",
+          "description": "Report organizes findings by package or module, making it easy to see which modules use axios"
+        },
+        {
+          "name": "shows_dependency_tree",
+          "description": "Report displays a clear dependency tree showing relationships between packages"
+        },
+        {
+          "name": "identifies_version_conflicts",
+          "description": "Report flags if multiple versions of axios are required by different packages"
+        },
+        {
+          "name": "identifies_other_http_libs",
+          "description": "Report identifies other HTTP libraries beyond axios (if present)"
+        },
+        {
+          "name": "actionable_consolidation",
+          "description": "Report provides enough detail to plan a consolidation strategy"
+        }
+      ],
+      "files": []
+    }
+  ]
+}
